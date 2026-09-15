@@ -13,3 +13,7 @@ WoModoro currently only support the current `master` branch. Fixes land there an
 **Please do not open a public issue for a security problem.**
 
 Report it privately through GitHub, from [Security → Report a vulnerability](https://github.com/lamboley/womodoro/security/advisories/new). That opens a private advisory visible only to you and the maintainer.
+
+## Security Standards
+
+This project follows the [OWASP Top 10](https://top10.owasp.org/2025/) and [OWASP Application Security Verification Standard (ASVS)](https://owasp.org/www-project-application-security-verification-standard/) guidelines to ensure the security of the application.
