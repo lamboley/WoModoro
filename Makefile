@@ -18,8 +18,12 @@
 test-go: ## Run `go test`.
 	scripts/test-go.sh
 
+.PHONY: test-vue
+test-vue: ## Run `npm test`.
+	scripts/test-vue.sh
+
 .PHONY: test
-test: test-go ## Run all test scripts.
+test: test-go test-vue ## Run all test scripts.
 
 ##@ Update
 
