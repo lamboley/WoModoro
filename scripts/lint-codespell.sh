@@ -14,29 +14,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script removes build and test artifacts.
+# This script checks for common spelling mistakes.
 #
 # Usage:
-#   scripts/clean.sh
+#   scripts/lint-codespell.sh
 
 set -euo pipefail
 
-WOMOROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+WOMOROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd -P)"
 source "${WOMOROOT}/scripts/lib/init.sh"
 
-CLEAN_PATHS=(
-  "coverage"
-  "coverage.txt"
-  "coverage.html"
-  "junit.xml"
-  "node_modules"
-  "dist"
-  "web/coverage"
-  "web/node_modules"
-  "web/dist"
-  "bin"
-)
+cd "${WOMOROOT}"
 
-for path in "${CLEAN_PATHS[@]}"; do
-  rm -rf "${WOMOROOT:?}/${path:?}"
-done
+if ! command -v uvx >/dev/null 2>&1; then
+  womo::log::error "uvx is required; run scripts/install-uv.sh"
+  exit 1
+fi
+
+CODESPELL="codespell==2.4.1"
+
+if ! uvx --from "${CODESPELL}" codespell; then
+  womo::log::error "Codespell has failed; run scripts/update-codespell.sh"
+  exit 1
+fi

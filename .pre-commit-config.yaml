@@ -1,3 +1,4 @@
+exclude: ^vendor/|^test/tools/vendor/
 repos:
   - repo: https://github.com/gitleaks/gitleaks
     rev: 83d9cd684c87d95d656c1458ef04895a7f1cbd8e # v8.30.1
@@ -9,6 +10,11 @@ repos:
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
+      - id: mixed-line-ending
+      - id: check-byte-order-marker
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-yaml
 
   - repo: local
     hooks:

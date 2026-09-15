@@ -29,8 +29,12 @@ update-go: ## Run `go mod tidy` and gofmt.
 	scripts/update-gofmt.sh
 	scripts/update-golangci-lint.sh
 
+.PHONY: update-codespell
+update-codespell: ## Fix common spelling mistakes.
+	scripts/update-codespell.sh
+
 .PHONY: update
-update: update-go ## Run all update scripts.
+update: update-go update-codespell ## Run all update scripts.
 
 ##@ Lint
 
@@ -44,8 +48,12 @@ lint-go: ## Run all go lint scripts.
 	scripts/lint-gofmt.sh
 	scripts/lint-golangci-lint.sh
 
+.PHONY: lint-codespell
+lint-codespell: ## Check for common spelling mistakes.
+	scripts/lint-codespell.sh
+
 .PHONY: lint
-lint: lint-sh lint-go ## Run all lint scripts.
+lint: lint-sh lint-go lint-codespell ## Run all lint scripts.
 
 ##@ Helpers
 
