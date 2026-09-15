@@ -14,23 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script applies the fixes `golangci-lint` is able to make itself.
+# This script runs the frontend tests.
 #
 # Usage:
-#   scripts/update-golangci-lint.sh
+#   scripts/test-vue.sh
 
 set -euo pipefail
 
 WOMOROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd -P)"
 source "${WOMOROOT}/scripts/lib/init.sh"
 
-cd "${WOMOROOT}"
+cd "${WOMOROOT}/frontend"
 
-ret=0
-GOLANGCI_LINT="github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.13.1"
-out=$(go run "${GOLANGCI_LINT}" run --fix ./... 2>&1) || ret=$?
-
-if [[ $ret -ne 0 ]]; then
-  echo "${out}" >&2
-  womo::log::warn 'Golangci-lint could not fix every issue.'
-fi
+npm test
