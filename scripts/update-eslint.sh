@@ -14,10 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script runs the frontend tests.
+# This script fixes unambiguous common spelling mistakes.
 #
 # Usage:
-#   scripts/test-vue.sh
+#   scripts/update-codespell.sh
 
 set -euo pipefail
 
@@ -26,4 +26,11 @@ source "${WOMOROOT}/scripts/lib/init.sh"
 
 cd "${WOMOROOT}/frontend"
 
-npm test
+ret=0
+out=$(npm run --silent eslint -- --fix 2>&1) || ret=$?
+
+if [[ $ret -ne 0 ]]; then
+  echo "${out}" >&2
+  womo::log::error 'Eslint has failed.'
+  exit 1
+fi

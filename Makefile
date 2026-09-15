@@ -33,12 +33,20 @@ update-go: ## Run `go mod tidy` and gofmt.
 	scripts/update-gofmt.sh
 	scripts/update-golangci-lint.sh
 
+.PHONY: update-eslint
+update-eslint: ## Run eslint --fix.
+	scripts/update-eslint.sh
+
+.PHONY: update-stylelint
+update-stylelint: ## Run stylelint --fix.
+	scripts/update-stylelint.sh
+
 .PHONY: update-codespell
 update-codespell: ## Fix common spelling mistakes.
 	scripts/update-codespell.sh
 
 .PHONY: update
-update: update-go update-codespell ## Run all update scripts.
+update: update-go update-codespell update-eslint update-stylelint ## Run all update scripts.
 
 ##@ Lint
 
@@ -51,6 +59,14 @@ lint-go: ## Run all go lint scripts.
 	scripts/lint-gomod.sh
 	scripts/lint-gofmt.sh
 	scripts/lint-golangci-lint.sh
+
+.PHONY: lint-eslint
+lint-eslint: ## Run eslint.
+	scripts/lint-eslint.sh
+
+.PHONY: lint-stylelint
+lint-stylelint: ## Run stylelint.
+	scripts/lint-stylelint.sh
 
 .PHONY: lint-codespell
 lint-codespell: ## Check for common spelling mistakes.

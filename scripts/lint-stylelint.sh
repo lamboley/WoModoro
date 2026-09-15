@@ -14,10 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script runs the frontend tests.
+# This script checks the stylesheets with stylelint.
 #
-# Usage:
-#   scripts/test-vue.sh
+# Usage: `scripts/lint-stylelint.sh`.
 
 set -euo pipefail
 
@@ -26,4 +25,11 @@ source "${WOMOROOT}/scripts/lib/init.sh"
 
 cd "${WOMOROOT}/frontend"
 
-npm test
+ret=0
+out=$(npm run --silent stylelint 2>&1) || ret=$?
+
+if [[ $ret -ne 0 ]]; then
+  echo "${out}" >&2
+  womo::log::error 'Stylelint has failed.'
+  exit 1
+fi

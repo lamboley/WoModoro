@@ -14,10 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script runs the frontend tests.
+# This script checks the frontend code with eslint.
 #
-# Usage:
-#   scripts/test-vue.sh
+# Usage: `scripts/lint-eslint.sh`.
 
 set -euo pipefail
 
@@ -26,4 +25,11 @@ source "${WOMOROOT}/scripts/lib/init.sh"
 
 cd "${WOMOROOT}/frontend"
 
-npm test
+ret=0
+out=$(npm run eslint 2>&1) || ret=$?
+
+if [[ $ret -ne 0 ]]; then
+  echo "${out}" >&2
+  womo::log::error 'Eslint has failed.'
+  exit 1
+fi
