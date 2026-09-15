@@ -1,0 +1,16 @@
+# Environment
+.env
+
+# Editor
+.vscode/
+
+# Frontend
+/web/node_modules/
+/web/dist/
+/node_modules/
+/dist/
+
+# Coverage
+coverage.txt
+coverage.html
+junit.xml

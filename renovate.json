@@ -1,0 +1,23 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "minimumReleaseAge": "7 days",
+  "packageRules": [
+    {
+      "description": "Major updates wait for approval on the dependency dashboard",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "k3s tags carry a +k3s1 build suffix, so strict semver does not apply",
+      "matchDepNames": [
+        "k3s-io/k3s"
+      ],
+      "versioning": "loose"
+    }
+  ]
+}
