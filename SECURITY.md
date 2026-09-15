@@ -2,11 +2,7 @@
 
 ## Supported versions
 
-WoModoro currently only support the current `master` branch. Fixes land there and are not backported.
-
-| Version  | Supported |
-| -------- | --------- |
-| `master` | yes       |
+Security fixes and updates are only applied to the latest released version. So always try to be up to date.
 
 ## Reporting a vulnerability
 
